@@ -40,3 +40,10 @@ module.exports.getUserByEmail = function(email, callback){
     const query = {email: email}
     User.findOne(query, callback);
 }
+
+module.exports.comparePwd = function(candidatePwd, hash,callback){
+    bcrypt.compare(candidatePwd, hash, (err, isMatch) =>{
+        if(err) throw err;
+        callback(null, isMatch);
+    });
+}
